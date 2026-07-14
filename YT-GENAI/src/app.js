@@ -6,7 +6,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
     res.status(200).json({
-        // success: true,
+        success: true,
         // message: "Server is running successfully"
     // });
 // });
