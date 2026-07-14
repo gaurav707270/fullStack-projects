@@ -9,6 +9,6 @@ app.get("/", (req, res) => {
         success: true,
         message: "Server is running successfully"
     });
-// });
+});
 
 // module.exports = app;node
