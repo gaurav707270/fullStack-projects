@@ -6,8 +6,9 @@ export default function Users() {
 
   // fetching data
   const fetchUserData = async () => {
-    const res = await axios.get("http://localhost:3000/allUserData");
-    setAllUser(res.data);
+    const res = await axios.get("http://localhost:5000/api/user/getuser");
+    console.log(res.data);
+    setAllUser(res.data.data);
   };
 
   useEffect(() => {
@@ -20,7 +21,10 @@ export default function Users() {
 
   // post new user data
   const postNewUserData = async (newUser) => {
-    await axios.post("http://localhost:3000/allUserData", newUser);
+    await axios.post(
+      "http://localhost:5000/api/user/adduser",
+      newUser
+    );
 
     fetchUserData();
 
@@ -40,11 +44,18 @@ export default function Users() {
 
   // remove user function
   const removeUser = (user) => {
-    deleteUserData(user.id);
-  };
+  deleteUserData(user.id);
+};
 
   const deleteUserData = async (id) => {
-    await axios.delete(`http://localhost:3000/allUserData/${id}`);
+    await axios.delete(
+      "http://localhost:5000/api/user/deleteuser",
+      {
+        data: {
+          id: id
+        }
+      }
+    );
     fetchUserData();
   };
 
@@ -68,8 +79,12 @@ export default function Users() {
     };
 
     await axios.put(
-      `http://localhost:3000/allUserData/${editId}`,
-      updatedUser
+      "http://localhost:5000/api/user/updateuser",
+      {
+        id: editId,
+        email: userEmailRef.current.value,
+        password: userPasswordRef.current.value,
+      }
     );
 
     fetchUserData();

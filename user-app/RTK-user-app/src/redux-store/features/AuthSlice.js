@@ -3,7 +3,7 @@ import axios from "axios";
 import { act } from "react";
 
 export const addUser = createAsyncThunk("post/addUser", async (userData) => {
-  const res = await axios.post("http://localhost:3000/users", userData)
+  const res = await axios.post("http://localhost:5000/api/user/addsingup", userData)
   return res.data
 
 })
