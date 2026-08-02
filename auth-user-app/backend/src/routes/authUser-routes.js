@@ -1,8 +1,9 @@
 import express from "express";
-import { singUP } from "../controllers/authUser-controller.js";
+import { fetchAuthUser, signUPAuthUser } from "../controllers/authUser-controller.js";
 
-const router = express.Router();
+const router = express.Router()
 
-router.post("/auth", singUP);
+router.get("/get", fetchAuthUser)
+router.get("/signup", signUPAuthUser)
 
-export default router;
+export default router

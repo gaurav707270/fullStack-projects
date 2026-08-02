@@ -1,21 +1,22 @@
 import express from "express";
-import cors from "cors";
-import routes from "./src/routes/authUser-routes.js";
-import connectDb from "./src/config/connect-db.js";
+import connectDB from "./src/config/connect-db.js";
+import router from "./src/routes/authUser-routes.js";
+import cors from "cors"
 
 const app = express();
 
-app.use(express.json());
-app.use(cors());
+app.use(express.json())
 
-connectDb();
+app.use(cors())
 
-app.use("/api", routes);
+connectDB()
+
+app.use("/api",router)
 
 app.get("/", (req, res) => {
-    res.send("Server is now live");
-});
+    res.end("ser now live")
+})
 
 app.listen(3000, () => {
-    console.log("Server started successfully on port 3000");
-});
+    console.log("server started successfully")
+})
