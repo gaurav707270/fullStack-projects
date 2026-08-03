@@ -1,9 +1,10 @@
 import express from "express";
-import { fetchAuthUser, signUPAuthUser } from "../controllers/authUser-controller.js";
+import { fetchAuthUser, signInAuthUser, signUPAuthUser } from "../controllers/authUser-controller.js";
 
 const router = express.Router()
 
-router.get("/get", fetchAuthUser)
-router.get("/signup", signUPAuthUser)
+router.get("/get", fetchAuthUser);
+router.post("/signup", signUPAuthUser);
+router.post("/signin", signInAuthUser);
 
-export default router
+export default router;

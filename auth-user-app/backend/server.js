@@ -13,9 +13,9 @@ connectDB()
 
 app.use("/api",router)
 
-app.get("/", (req, res) => {
-    res.end("ser now live")
-})
+// app.get("/", (req, res) => {
+//     res.end("ser now live")
+// })
 
 app.listen(3000, () => {
     console.log("server started successfully")

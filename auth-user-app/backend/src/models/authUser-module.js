@@ -8,4 +8,4 @@ const authUserSchema = new mongoose.Schema({
     timestamps: true
 })
 
-export default mongoose.model("authUser", authUserSchema)
+export default mongoose.model("authUser", authUserSchema) 
