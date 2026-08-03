@@ -51,52 +51,52 @@ export const signUPAuthUser = async (req, res) => {
 export const signInAuthUser = async (req, res) => {
     try {
         const { email, password } = req.body;
+
         const singInUser = await authUser.findOne({ email });
 
-        console.log("user singIn successfully")
-
         if (!singInUser) {
-            res.status(400).json({
+            return res.status(400).json({
                 status: false,
-                message: "user not found"
+                message: "User not found"
             });
-
-            const isMatch = await bcrypt.compare(password, authUser.password)
-
-            if (isMatch) {
-
-                const token = jwt.sign({ userId: authUser._id, email: authUser.email },
-                    "!@#$%^&*()",
-                    { expiresIn: "1h" }
-                );
-
-                res.cookie("token", token, {
-                    httpOnly: true,
-                    maxAge: 1000 * 60 * 60
-                })
-
-                // const token = jwt.sign(authUser,"S@chin7072",{expiresIn:"1h"})
-
-
-                res.status(200).json({
-                    status: true,
-                    message: "user singIn successfully ",
-                    token
-                })
-            } else {
-                res.status(400).json({
-                    status: false,
-                    message: "email or password wrong"
-                });
-            };
         }
+
+        const isMatch = await bcrypt.compare(
+            password,
+            singInUser.password
+        );
+
+        if (!isMatch) {
+            return res.status(400).json({
+                status: false,
+                message: "Email or password is wrong"
+            });
+        }
+
+        const token = jwt.sign(
+            {
+                userId: singInUser._id,
+                email: singInUser.email
+            },
+            "!@#$%^&*()",
+            {
+                expiresIn: "1h"
+            }
+        );
+
+        return res.status(200).json({
+            status: true,
+            message: "User signin successfully",
+            token
+        });
 
     } catch (err) {
         console.log(err);
-        res.status(400).json({
+
+        return res.status(500).json({
             status: false,
-            message: "authuser singin failed ",
-            err: err.message
+            message: "Signin failed",
+            error: err.message
         });
     }
 };
