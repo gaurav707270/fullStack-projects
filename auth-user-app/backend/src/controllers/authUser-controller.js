@@ -9,6 +9,7 @@ export const fetchAuthUser = async (req, res) => {
         res.status(200).json({
             status: true,
             message: "authuser data fetching successfully",
+            jwt: res.user,
             data: result
         })
 
@@ -68,6 +69,8 @@ export const signInAuthUser = async (req, res) => {
 
         if (!isMatch) {
             return res.status(400).json({
+                pass: singInUser.password,
+                isMatch,
                 status: false,
                 message: "Email or password is wrong"
             });
