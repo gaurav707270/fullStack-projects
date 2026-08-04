@@ -87,6 +87,11 @@ export const signInAuthUser = async (req, res) => {
             }
         );
 
+        res.cookie("token", token, {
+            httpOnly:true,
+            maxAge: 1000 * 60 * 60 * 1
+        })
+
         return res.status(200).json({
             status: true,
             message: "User signin successfully",
