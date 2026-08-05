@@ -30,3 +30,26 @@ export const signup = async (req, res) => {
         });
     }
 };
+
+export const fetchUser = async (req, res) => {
+    try {
+
+        console.log(req.body)
+        const result = await user.find();
+
+        res.status(200).json({
+            status: true,
+            message: "user fetching successfully",
+            data: result
+        })
+
+    } catch (err) {
+        console.log(err);
+
+        res.status(400).json({
+            status: false,
+            message: "user fetching failed",
+            err: err.message
+        })
+    }
+}
