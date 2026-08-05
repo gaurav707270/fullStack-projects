@@ -42,45 +42,65 @@ export const addProduct = async (req, res) => {
     }
 }
 
-export const updataProduct = async () => {
+export const updateProduct = async (req, res) => {
     try {
         console.log(req.body);
 
-        const result = await Product.findByIdAndUpdate(req.body._id, req.body);
+        const result = await product.findByIdAndUpdate(
+            req.body.id,
+            req.body
+        );
+
+        if (!result) {
+            return res.status(404).json({
+                status: false,
+                message: "Product not found"
+            });
+        }
 
         res.status(200).json({
             status: true,
-            Message: "product updating successfully",
+            message: "Product updated successfully",
             data: result
-        })
+        });
 
     } catch (err) {
         console.log(err);
+
         res.status(400).json({
             status: false,
-            Message: "product updateing failed ",
-            err: err.Message
-        })
+            message: "Product updating failed",
+            error: err.message
+        });
     }
-}
+};
 
 export const deleteProduct = async (req, res) => {
     try {
-        console.log(req.body)
-        const result = await product.findByIdAndDelete(req.body.id, req.body);
+        console.log(req.body);
+
+        const result = await product.findByIdAndDelete(req.body.id);
+
+        if (!result) {
+            return res.status(404).json({
+                status: false,
+                message: "Product not found"
+            });
+        }
 
         res.status(200).json({
             status: true,
-            Message: "product deleted successfully",
+            message: "Product deleted successfully",
             data: result
-        })
+        });
 
     } catch (err) {
         console.log(err);
+
         res.status(400).json({
             status: false,
-            Message: "product deleting failed",
-            err: err.Message
-        })
+            message: "Product deleting failed",
+            error: err.message
+        });
     }
-}
+};
