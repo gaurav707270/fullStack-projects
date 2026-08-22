@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes, Route } from "react-router";
 
 
-// import SignUp from './screen/SignUp'
+import SignUp from './screen/SignUp'
 import SignIn from './screen/SignIn';
 // import Users from './screen/Users';
 
