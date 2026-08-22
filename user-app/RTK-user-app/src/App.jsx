@@ -11,7 +11,7 @@
     <div>
       {/* <Routes> */}
         {/* <Route path='/' element={<SignIn />} /> */}
-        <Route path='/signup' element={<SignUp />} />
+        {/* <Route path='/signup' element={<SignUp />} /> */}
         <Route path='/users' element={<Users />} />
 
       </Routes>
